@@ -1,0 +1,38 @@
+[
+    {
+        "id":1,
+        "name":"Lien Minh Huyen Thoai",
+        "tel":"0918131516",
+        "Permission":1
+    },
+    {
+        "id":2,
+        "name":"Iron man",
+        "tel":"0424534564",
+        "Permission":2
+    },
+    {
+        "id":3,
+        "name":"Tahm Kench",
+        "tel":"3456786764",
+        "Permission":3
+    },
+    {
+        "id":4,
+        "name":"Yasuo Zed Riven",
+        "tel":"3456786768",
+        "Permission":4
+    },
+    {
+        "id":5,
+        "name":"Jinx Catlyn Vayne",
+        "tel":"0134537864",
+        "Permission":5
+    },
+    {
+        "id":6,
+        "name":"Faker Bang Wolf",
+        "tel":"04538778979",
+        "Permission":6
+    }
+]
