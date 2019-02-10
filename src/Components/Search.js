@@ -11,10 +11,10 @@ class Search extends Component {
 	
 
 	isChange = (event) => {
-		console.log(event.target.value);
 		this.setState({
 			tempValue:event.target.value
 		});
+		this.props.checkConnectProps(this.state.tempValue)
 	}
 
 	hienThiNut = () => {
