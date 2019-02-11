@@ -13,6 +13,7 @@ class TableDataRow extends Component {
 
 	editClick = () => {
 		this.props.editFunClick();
+		this.props.changeEditUserStatus();
 	}
 
 	render() {

@@ -32,7 +32,7 @@ class AddUser extends Component {
 		if (this.props.hienThiForm === true) {
 			return (
 				<div className="col">
-				<form>
+				<form method="post">
 					<div className="card border-primary mb-3 mt-2">
 						<div className="card-header">Thêm mới User vào hệ thống</div>
 						<div className="card-body text-primary">
@@ -47,7 +47,7 @@ class AddUser extends Component {
 									<option value>Chọn quyền mặc định</option>
 									<option value={1}>Admin</option>
 									<option value={2}>Moderator</option>
-									<option value={3}>Normal</option>
+									<option value={3}>Normal User</option>
 								</select>
 							</div>
 							<div className="form-group">

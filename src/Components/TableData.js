@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 import TableDataRow from './TableDataRow';
 
 class TableData extends Component {
-	mappingDataUser = () => this.props.dataUserProps.map((value,key) => (
-		<TableDataRow editFunClick={(user) => this.props.editFun(value)} userName={value.name} key={key} stt={key} tel={value.tel} permission={value.Permission} />
-	));
+	mappingDataUser = () =>
+		this.props.dataUserProps.map((value, key) => (
+			<TableDataRow
+				changeEditUserStatus={() => this.props.changeEditUserStatus()}
+				editFunClick={(user) => this.props.editFun(value)}
+				userName={value.name}
+				key={key}
+				stt={key}
+				tel={value.tel}
+				permission={value.Permission}
+			/>
+		));
 
 	render() {
 		return (
@@ -19,9 +28,7 @@ class TableData extends Component {
 							<th>Thao tác</th>
 						</tr>
 					</thead>
-					<tbody>
-						{this.mappingDataUser()}
-					</tbody>
+					<tbody>{this.mappingDataUser()}</tbody>
 				</table>
 			</div>
 		);
