@@ -5,13 +5,27 @@ class Search extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tempValue: ''
+			tempValue: '',
+			userObj: {}
 		};
 	}
 
+	getUserEditInfo = (info) => {
+		this.setState({
+			userObj: info
+		});
+		this.props.getUserEditInfoApp(info);
+	};
+
 	isShowEditForm = () => {
 		if (this.props.editUserStatus === true) {
-			return <EditUser userEditObject={this.props.userEditObject} changeEditUserStatus={() => this.props.changeEditUserStatus()} />;
+			return (
+				<EditUser
+					getUserEditInfo = {(info) => this.getUserEditInfo(info)}
+					userEditObject={this.props.userEditObject}
+					changeEditUserStatus={() => this.props.changeEditUserStatus()}
+				/>
+			);
 		}
 	};
 
@@ -25,13 +39,13 @@ class Search extends Component {
 	hienThiNut = () => {
 		if (this.props.hienThiForm === true) {
 			return (
-				<div className="btn btn-block btn-outline-secondary" onClick={() => this.props.ketNoi()}>
+				<div className="btn btn-block btn-outline-secondary mt-2" onClick={() => this.props.ketNoi()}>
 					Đóng lại
 				</div>
 			);
 		} else {
 			return (
-				<div className="btn btn-block btn-outline-info" onClick={() => this.props.ketNoi()}>
+				<div className="btn btn-block btn-outline-info mt-2" onClick={() => this.props.ketNoi()}>
 					Thêm mới
 				</div>
 			);

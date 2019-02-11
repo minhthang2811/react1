@@ -13,12 +13,45 @@ class App extends Component {
 		super(props);
 		this.state = {
 			hienThiForm: true,
-			data: DataUser,
+			data: [],
 			searchText: '',
 			editUserStatus: false,
-			userEditObject:{}
+			userEditObject: {}
 		};
 	}
+
+	componentWillMount() {
+	  if(localStorage.getItem('userData') === null){
+		  localStorage.setItem('userData',JSON.stringify(DataUser));
+	  }else{
+		  var temp = JSON.parse(localStorage.getItem('userData'))
+		  this.setState({
+			  data: temp
+		  })
+	  }
+	}
+	
+
+	deleteUser = (idUser) => {
+		var tempData = this.state.data.filter(item => item.id !== idUser);
+		this.setState({
+			data: tempData
+		})
+
+		localStorage.setItem('userData',JSON.stringify(tempData))
+	};
+
+	getUserEditInfoApp = (info) => {
+		this.state.data.forEach((value, key) => {
+			console.log();
+			if (value.id === info.id) {
+				value.name = info.name;
+				value.tel = info.tel;
+				value.Permission = info.Permission;
+			}
+		});
+		localStorage.setItem('userData',JSON.stringify(this.state.data))
+	};
 
 	changeEditUserStatus = () => {
 		this.setState({
@@ -33,11 +66,10 @@ class App extends Component {
 	};
 
 	editUser = (user) => {
-		console.log('Da ket noi thanh cong');
 		this.setState({
 			userEditObject: user
-		})
-		console.log(user);
+		});
+
 	};
 
 	getNewUserData = (name, tel, Permission) => {
@@ -51,8 +83,7 @@ class App extends Component {
 		this.setState({
 			data: items
 		});
-
-		console.log(this.state.data);
+		localStorage.setItem('userData',JSON.stringify(items))
 	};
 
 	getTextSearch = (dl) => {
@@ -62,6 +93,7 @@ class App extends Component {
 	};
 
 	render() {
+		//  localStorage.setItem('userData',JSON.stringify(DataUser))
 		var ketqua = [];
 		this.state.data.forEach((item) => {
 			if (item.name.indexOf(this.state.searchText) !== -1) {
@@ -75,7 +107,8 @@ class App extends Component {
 					<div className="container">
 						<div className="row">
 							<Search
-							userEditObject={this.state.userEditObject}
+								getUserEditInfoApp={(info) => this.getUserEditInfoApp(info)}
+								userEditObject={this.state.userEditObject}
 								checkConnectProps={(dl) => this.getTextSearch(dl)}
 								ketNoi={() => this.doiTrangThai()}
 								hienThiForm={this.state.hienThiForm}
@@ -83,6 +116,7 @@ class App extends Component {
 								changeEditUserStatus={() => this.changeEditUserStatus()}
 							/>
 							<TableData
+								deleteUser={(idUser) => this.deleteUser(idUser)}
 								editFun={(user) => this.editUser(user)}
 								dataUserProps={ketqua}
 								changeEditUserStatus={() => this.changeEditUserStatus()}
